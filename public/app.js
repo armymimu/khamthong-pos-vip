@@ -249,10 +249,13 @@ function initWebSocket() {
     fetch('./default-store.json')
       .then(r => r.ok ? r.json() : null)
       .then(defaultData => {
-        if (defaultData && (!globalServerState || !globalServerState.settings)) {
+        if (defaultData && defaultData.settings && Array.isArray(defaultData.tables)) {
           normalizeClientTableTimestamps(defaultData);
           globalServerState = defaultData;
           saveStateToLocalDevice();
+          if (globalServerState.settings.defaultTareWeight) {
+            customTareWeight = globalServerState.settings.defaultTareWeight;
+          }
           const isScale = globalServerState.settings && globalServerState.settings.scaleMode !== false;
           toggleStaffScaleView(isScale ? 'scale' : 'catalog', true);
           renderAll();
