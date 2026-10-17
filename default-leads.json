@@ -1,0 +1,62 @@
+[
+  {
+    "deviceId": "DEV-GNEL-7069",
+    "storeName": "คำทอง ชี้นดาด & ปิ้งย่าง",
+    "ownerName": "-",
+    "phone": "+856 20 5555 9999",
+    "location": "-",
+    "storeConcept": "sindad",
+    "ordersCount": 0,
+    "totalRevenueLAK": 0,
+    "vipClicks": 0,
+    "isVipLicensed": false,
+    "lastEvent": "เปิดเข้าใช้งานระบบ POS",
+    "firstSeenAt": 1792218227580,
+    "lastActiveAt": 1792218227580
+  },
+  {
+    "deviceId": "DEV-VTE-8821",
+    "storeName": "ຮ້ານຊີ້ນດາດ ອ້າຍຄຳ (เวียงจันทน์)",
+    "ownerName": "ອ້າຍຄຳ (อ้ายคำ)",
+    "phone": "+856 20 5588 1234",
+    "location": "นครหลวงเวียงจันทน์",
+    "storeConcept": "sindad",
+    "ordersCount": 42,
+    "totalRevenueLAK": 14850000,
+    "vipClicks": 3,
+    "isVipLicensed": false,
+    "lastEvent": "กดดูแพ็กเกจ VIP PRO (สนใจอัปเกรด)",
+    "firstSeenAt": 1791958966823,
+    "lastActiveAt": 1792217326823
+  },
+  {
+    "deviceId": "DEV-PKS-3910",
+    "storeName": "Laos Soul Cafe & Roastery",
+    "ownerName": "คุณเมย์ (May)",
+    "phone": "+856 20 9911 4567",
+    "location": "ปากเซ (จำปาสัก)",
+    "storeConcept": "cafe",
+    "ordersCount": 28,
+    "totalRevenueLAK": 3420000,
+    "vipClicks": 1,
+    "isVipLicensed": false,
+    "lastEvent": "เช็กบิลสำเร็จ (BCEL One)",
+    "firstSeenAt": 1792045366823,
+    "lastActiveAt": 1792215286823
+  },
+  {
+    "deviceId": "DEV-LPB-7742",
+    "storeName": "ครัวริมโขง หลวงพระบาง",
+    "ownerName": "เฮียตี๋",
+    "phone": "081-998-7766 / +856 20 2233 8899",
+    "location": "หลวงพระบาง",
+    "storeConcept": "restaurant",
+    "ordersCount": 85,
+    "totalRevenueLAK": 29600000,
+    "vipClicks": 5,
+    "isVipLicensed": true,
+    "lastEvent": "เปิดใช้งาน VIP PRO License สำเร็จ",
+    "firstSeenAt": 1791786166823,
+    "lastActiveAt": 1792217866823
+  }
+]
