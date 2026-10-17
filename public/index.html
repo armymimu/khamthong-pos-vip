@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ຄຳທອງ ຊິ້ນດາດ - KhamThong SinDad POS (Luxury Gold)</title>
+  
+  <!-- PWA Meta Tags -->
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#D4AF37">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ຄຳທອງ POS">
+
+  <!-- Google Fonts for Lao and Luxury Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Golden Glowing Orbs -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="toast-banner">
+    <span class="toast-icon" data-icon="sparkles"></span>
+    <span id="toastMsg">ສຳເລັດແລ້ວ</span>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- ══════════ iOS Header / Navigation Bar ══════════ -->
+    <header class="ios-header liquid-glass specular-shine">
+      <div class="brand-section">
+        <div class="brand-logo-icon" data-icon="drumstick"></div>
+        <div class="brand-title">
+          <h1 id="brandName" class="gold-text-gradient">ຄຳທອງ ຊິ້ນດາດ</h1>
+          <div class="brand-subtitle" id="brandTagline">ລະບົບຊັ່ງກິໂລ & POS ລະດັບ Luxury</div>
+        </div>
+      </div>
+
+      <!-- Segmented View Switcher: Staff (Mobile) vs Kitchen (KDS) vs Owner (VIP) -->
+      <div class="ios-segmented">
+        <button id="viewStaffBtn" class="seg-btn active" onclick="switchView('staff')">
+          <i class="seg-ic" data-icon="user"></i>
+          <span id="tabStaffText">ພະນັກງານ</span>
+        </button>
+        <button id="viewKitchenBtn" class="seg-btn" onclick="switchView('kitchen')">
+          <i class="seg-ic" data-icon="flame"></i>
+          <span id="tabKitchenText">ຫ້ອງຄົວ (KDS)</span>
+        </button>
+        <button id="viewOwnerBtn" class="seg-btn" onclick="switchView('owner')">
+          <i class="seg-ic" data-icon="crown"></i>
+          <span id="tabOwnerText">ເຈົ້າຂອງຮ້ານ</span>
+        </button>
+      </div>
+
+      <!-- Right Header Actions: Settings & Language Toggle -->
+      <div class="header-actions-right">
+        <button id="vipBadgeBtn" class="vip-crown-badge" onclick="openVipUpgradeModal()" title="VIP PRO Edition">
+          <i data-icon="crown"></i><span>VIP PRO</span>
+        </button>
+        <button id="menuManagerBtn" class="icon-btn-round" title="ຈັດການເມນູ & ຮູບແບບຮ້ານ (Menu Manager)" onclick="openMenuManager()"><i data-icon="pot"></i></button>
+        <button id="settingsBtn" class="icon-btn-round" title="ຕັ້ງຄ່າ" onclick="openSettingsModal()"><i data-icon="settings"></i></button>
+        <button id="langToggleBtn" class="lang-toggle-btn" onclick="toggleLanguage()">
+          <span id="langFlag" class="flag-wrap" data-icon="flag-la"></span>
+          <span id="langLabel">ລາວ</span>
+        </button>
+        <button class="gold-badge rate-badge-btn" id="rateBadge" title="ກົດເພື່ອປ່ຽນອັດຕາແລກປ່ຽນ (Click to change rate)" onclick="openExchangeRateModal()">
+          1฿ = 630₭
+        </button>
+      </div>
+    </header>
+
+    <!-- ══════════ 1-TAP BUSINESS CONCEPT SWITCHER BAR ══════════ -->
+    <div id="quickConceptBar" class="quick-concept-bar liquid-glass">
+      <div class="qc-label">
+        <i data-icon="sparkles"></i>
+        <span id="qcBarLabel">ຮູບແບບຮ້ານ (1-Tap):</span>
+      </div>
+      <div class="qc-pills-scroll">
+        <button type="button" class="qc-pill active" id="qcBtn_sindad" onclick="applyStorePreset('sindad')">
+          <span>🥩</span> <span id="qcText_sindad">ຊີ້ນດາດ & ຊັ່ງໂລ</span>
+        </button>
+        <button type="button" class="qc-pill" id="qcBtn_restaurant" onclick="applyStorePreset('restaurant')">
+          <span>🍲</span> <span id="qcText_restaurant">ຮ້ານອາຫານ & ຕາມສັ່ງ</span>
+        </button>
+        <button type="button" class="qc-pill" id="qcBtn_cafe" onclick="applyStorePreset('cafe')">
+          <span>☕</span> <span id="qcText_cafe">ຄາເຟ່ & ກາເຟ</span>
+        </button>
+        <button type="button" class="qc-pill" id="qcBtn_bar" onclick="applyStorePreset('bar')">
+          <span>🍺</span> <span id="qcText_bar">ບາ & ຮ້ານເຫຼົ້າ</span>
+        </button>
+        <button type="button" class="qc-pill qc-edit-btn" onclick="openMenuManager()">
+          <i data-icon="plus"></i> <span id="qcText_edit">ເພີ່ມ/ແກ້ເມນູ</span>
+        </button>
+        <button type="button" class="qc-pill qc-register-btn" id="qcBtn_register" onclick="openShopRegisterModal()">
+          <span>📝</span> <span id="qcText_register">ຕັ້ງຊື່ຮ້ານຂອງທ່ານ (Save ລົງເຄື່ອງ)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════ MAIN CONTENT ══════════ -->
+    <main class="main-view-container">
+
+      <!-- ═════════════════════════════════════════════════
+           VIEW 1: STAFF VIEW (หน้าจอลูกน้อง/พนักงาน)
+           ═════════════════════════════════════════════════ -->
+      <section id="staffView" class="staff-view-grid">
+        
+        <!-- Left Column: Weight Scale & Golden Numpad -->
+        <div class="scale-card liquid-glass specular-shine">
+          
+          <!-- Mode Selection: Dine-in vs Takeaway -->
+          <div class="order-mode-row">
+            <div id="modeDineIn" class="mode-card active" onclick="setOrderMode('dinein')">
+              <div class="mode-icon" data-icon="utensils"></div>
+              <div class="mode-info">
+                <h3 id="modeDineInTitle">ກິນຢູ່ຮ້ານ</h3>
+                <p id="modeDineInSub">ເລືອກໂຕະ & ສະສົມບິນ</p>
+              </div>
+            </div>
+            <div id="modeTakeaway" class="mode-card" onclick="setOrderMode('takeaway')">
+              <div class="mode-icon" data-icon="bag"></div>
+              <div class="mode-info">
+                <h3 id="modeTakeawayTitle">ຊື້ກັບບ້ານ</h3>
+                <p id="modeTakeawaySub">ຊັ່ງແລ້ວຄິດເງິນເລີຍ</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scale Mode Switcher Row -->
+          <div class="scale-mode-header-row" id="scaleModeSwitcherRow">
+            <span class="scale-mode-title" id="scaleModeTitle"><i data-icon="weight"></i><span>ຊັ່ງກິໂລ (Weighing Scale)</span></span>
+            <button class="btn-void" id="toggleScaleModeBtn" style="padding: 3px 10px; font-size: 0.7rem; color: var(--gold-200); border-color: rgba(245, 208, 97, 0.45); background: rgba(212, 175, 55, 0.14);" onclick="toggleStaffScaleView()">
+              <span id="toggleScaleViewText">ສັ່ງຕາມເມນູ (Menu Mode)</span>
+            </button>
+          </div>
+
+          <div id="staffScaleSection" style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0;">
+            <!-- Grade Selector (Mixed vs Premium vs Pork Belly) -->
+            <div class="grade-selector" id="meatGradesContainer">
+              <!-- Dynamically populated from state -->
+            </div>
+
+            <!-- Big Gold Weight Display Box -->
+            <div class="weight-display-box">
+              <div class="weight-main-val">
+                <span id="displayWeight" class="weight-digits">0.00</span>
+                <span class="weight-unit">kg</span>
+              </div>
+              <div class="weight-sub-calc">
+                <div id="tareLabelIndicator" class="tare-indicator" style="display:none;">✓ ຫັກນ້ຳໜັກຊາມ -0.15 kg</div>
+                <div id="displayPriceTotal" class="calculated-price">0 ₭</div>
+                <div id="displayPriceTHB" class="calculated-price-thb">≈ 0 บาท</div>
+              </div>
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="quick-preset-row">
+              <div class="preset-pill" onclick="applyPresetWeight(0.30)">0.3 kg</div>
+              <div class="preset-pill" onclick="applyPresetWeight(0.50)">0.5 kg</div>
+              <div class="preset-pill" onclick="applyPresetWeight(0.80)">0.8 kg</div>
+              <div class="preset-pill" onclick="applyPresetWeight(1.00)">1.0 kg</div>
+              <div class="preset-pill" onclick="applyPresetWeight(1.50)">1.5 kg</div>
+              <div class="preset-pill" onclick="applyPresetWeight(2.00)">2.0 kg</div>
+            </div>
+
+            <!-- Luxury Golden Touch Numpad -->
+            <div class="numpad-grid">
+              <button class="num-btn" onclick="tapNumpad('1')">1</button>
+              <button class="num-btn" onclick="tapNumpad('2')">2</button>
+              <button class="num-btn" onclick="tapNumpad('3')">3</button>
+              
+              <button class="num-btn" onclick="tapNumpad('4')">4</button>
+              <button class="num-btn" onclick="tapNumpad('5')">5</button>
+              <button class="num-btn" onclick="tapNumpad('6')">6</button>
+              
+              <button class="num-btn" onclick="tapNumpad('7')">7</button>
+              <button class="num-btn" onclick="tapNumpad('8')">8</button>
+              <button class="num-btn" onclick="tapNumpad('9')">9</button>
+              
+              <!-- Auto-Tare Button (หักกะละมัง) -->
+              <button id="tareBtn" class="num-btn tare-btn" onclick="toggleTare()">
+                <span id="tareBtnText">ຫັກຊາມ (-0.15)</span>
+              </button>
+              <button class="num-btn" onclick="tapNumpad('0')">0</button>
+              <button class="num-btn" onclick="tapNumpad('.')">.</button>
+              
+              <!-- Backspace & Voice Order -->
+              <button class="num-btn" style="color: #F87171;" onclick="tapClear()">C</button>
+              <button id="voiceBtn" class="num-btn voice-btn" onclick="toggleVoiceOrder()">
+                <i data-icon="mic"></i><span id="voiceBtnText">ສຽງ</span>
+              </button>
+              <button class="num-btn" onclick="tapBackspace()"><i data-icon="backspace"></i></button>
+            </div>
+          </div>
+
+          <!-- Catalog Mode (When Scale Mode is OFF, e.g. Restaurant, Cafe, Bar) -->
+          <div id="staffCatalogSection" style="display: none; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow: hidden;">
+            <!-- Search & Category Filter inside Catalog -->
+            <div class="catalog-toolbar">
+              <div class="catalog-search-box">
+                <span style="font-size:0.8rem; opacity:0.7;">🔍</span>
+                <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="ຄົ້ນຫາເມນູດ່ວນ... / ค้นหาเมนู..." oninput="renderStaffCatalog()">
+                <button type="button" id="catalogSearchClearBtn" class="catalog-search-clear" style="display:none;" onclick="clearCatalogSearch()">✕</button>
+              </div>
+              <div class="category-tabs-strip" id="catalogCategoryStrip">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+            <div class="catalog-scroll-wrap">
+              <div class="catalog-grid" id="catalogFeaturedContainer">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Table Assignment, Beverages & Add to Order -->
+        <div class="items-side-card liquid-glass specular-shine">
+          
+          <!-- Table Selector (Visible when Dine-in) -->
+          <div id="tableSelectorContainer" class="table-picker-section">
+            <div class="section-label">
+              <span id="chooseTableLabel">ເລືອກໂຕະ (ກິນຢູ່ຮ້ານ)</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="selectedTableBadge" class="gold-badge">ໂຕະ 1</span>
+              </div>
+            </div>
+            <div class="table-pill-scroll" id="tablePillList">
+              <!-- Rendered via JS -->
+            </div>
+            <!-- Contextual Active Table Quick Action Bar -->
+            <div id="selectedTableQuickBar" class="selected-table-quick-bar" style="display:none;">
+              <div class="stq-info">
+                <span class="stq-dot"></span>
+                <span id="stqSummaryText">ໂຕະ 1 ມີບິນສະສົມ: 0 ₭</span>
+              </div>
+              <div class="stq-actions">
+                <button type="button" class="stq-btn inspect" onclick="openTableInspector(selectedTableId)">
+                  <span id="stqInspectBtnText">👁️ ດູບິນ/ແກ້ໄຂ</span>
+                </button>
+                <button type="button" class="stq-btn checkout" onclick="triggerTableCheckout(selectedTableId)">
+                  <span id="stqCheckoutBtnText">💳 ເຊັກບິນດ່ວນ</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Tabs & Quick Add Items -->
+          <div class="beverage-header-row" id="rightBeverageHeaderRow">
+            <div class="section-label" style="margin-bottom:0;">
+              <span id="beveragesLabel">ເຄື່ອງດື່ມ & ຂອງແຖມ</span>
+            </div>
+            <!-- Category Filter Tabs -->
+            <div class="category-tabs-strip" id="categoryTabsStrip">
+              <button class="cat-tab-btn active" data-cat="all" onclick="switchQuickCategory('all')"><i data-icon="grid"></i><span class="cat-label">ທັງໝົດ</span></button>
+              <button class="cat-tab-btn" data-cat="drinks" onclick="switchQuickCategory('drinks')"><i data-icon="beer"></i><span class="cat-label">ເຄື່ອງດື່ມ</span></button>
+              <button class="cat-tab-btn" data-cat="addons" onclick="switchQuickCategory('addons')"><i data-icon="cube"></i><span class="cat-label">ເຄື່ອງຄຽງ</span></button>
+              <button class="cat-tab-btn" data-cat="freebies" onclick="switchQuickCategory('freebies')"><i data-icon="gift"></i><span class="cat-label">ຂອງແຖມ</span></button>
+            </div>
+          </div>
+
+          <!-- Scrollable Beverage Grid Container -->
+          <div class="beverage-grid-scroll-box" id="rightBeverageScrollBox">
+            <div class="beverage-grid" id="quickItemsContainer">
+              <!-- Populated dynamically from menu categories -->
+            </div>
+          </div>
+
+          <!-- Pinned Bottom Dock: Staged Orders + Kitchen Notes + Submit Action -->
+          <div class="order-checkout-dock">
+            <div class="section-label" style="font-size:0.75rem;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span id="stagedListLabel">ລາຍການທີ່ກຽມບັນທຶກ</span>
+                <button type="button" id="clearCartMiniBtn" class="clear-cart-mini-btn" style="display:none;" onclick="resetInputForm()">🗑️ <span id="clearCartMiniText">ລ້າງ</span></button>
+              </div>
+              <span id="stagedTotalText" style="color:var(--gold-300); font-weight:800;">0 ₭</span>
+            </div>
+            <div class="staged-order-box" id="stagedOrderBox">
+              <div style="color: var(--text-muted); font-size: 0.75rem; text-align: center; padding: 6px;" id="emptyStagedHint">
+                ຍັງບໍ່ມີລາຍການ (ກົດຊັ່ງກິໂລ ຫຼື ເລືອກເຄື່ອງດື່ມ)
+              </div>
+            </div>
+
+            <!-- 1-Tap Kitchen Notes / Special Requests Strip -->
+            <div class="kitchen-notes-strip" id="kitchenNotesStrip">
+              <span class="kn-label" id="knLabelText">📝 ສົ່ງຄົວ:</span>
+              <button type="button" class="kn-chip" data-note="🌶️ ເຜັດນ້ອຍ / เผ็ดน้อย" onclick="toggleKitchenNote(this)">🌶️ <span class="kn-t" data-lo="ເຜັດນ້ອຍ" data-th="เผ็ดน้อย">ເຜັດນ້ອຍ</span></button>
+              <button type="button" class="kn-chip" data-note="🔥 ເຜັດແຊ່ບ / เผ็ดแซ่บ" onclick="toggleKitchenNote(this)">🔥 <span class="kn-t" data-lo="ເຜັດແຊ່ບ" data-th="เผ็ดแซ่บ">ເຜັດແຊ່ບ</span></button>
+              <button type="button" class="kn-chip" data-note="🚫 ບໍ່ໃສ່ແປ້ງນົວ / ไม่ชูรส" onclick="toggleKitchenNote(this)">🚫 <span class="kn-t" data-lo="ບໍ່ແປ້ງນົວ" data-th="ไม่ชูรส">ບໍ່ແປ້ງນົວ</span></button>
+              <button type="button" class="kn-chip" data-note="🧊 ແຍກນ້ຳ / แยกน้ำ" onclick="toggleKitchenNote(this)">🧊 <span class="kn-t" data-lo="ແຍກນ້ຳ" data-th="แยกน้ำ">ແຍກນ້ຳ</span></button>
+              <button type="button" class="kn-chip" data-note="⚡ ດ່ວນພິເສດ / ด่วนพิเศษ" onclick="toggleKitchenNote(this)">⚡ <span class="kn-t" data-lo="ດ່ວນ!" data-th="ด่วน!">ດ່ວນ!</span></button>
+            </div>
+
+            <!-- Big Action Button -->
+            <button id="submitOrderBtn" class="gold-primary-btn" onclick="submitCurrentOrder()">
+              <i data-icon="sparkles"></i>
+              <span id="submitOrderBtnText">ບັນທຶກລົງ ໂຕະ 1</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ═════════════════════════════════════════════════
+           VIEW 2: OWNER VIEW (หน้าจอเจ้าของร้าน VIP)
+           ═════════════════════════════════════════════════ -->
+      <section id="ownerView" class="owner-view-grid" style="display: none;">
+        
+        <!-- Top Metrics Cards -->
+        <div class="stats-cards-row">
+          <div class="stat-card liquid-glass specular-shine">
+            <div class="stat-icon" data-icon="banknote"></div>
+            <div class="stat-info">
+              <div class="stat-label" id="statRevLabel">ຍອດຂາຍລວມມື້ນີ້</div>
+              <div class="stat-value" id="statRevVal">0 ₭</div>
+              <div class="calculated-price-thb" id="statRevTHB">≈ 0 บาท</div>
+            </div>
+          </div>
+
+          <div class="stat-card liquid-glass specular-shine">
+            <div class="stat-icon" data-icon="weight"></div>
+            <div class="stat-info">
+              <div class="stat-label" id="statMeatLabel">ຊີ້ນຂາຍໄດ້ທັງໝົດ</div>
+              <div class="stat-value" id="statMeatVal">0.00 kg</div>
+            </div>
+          </div>
+
+          <div class="stat-card liquid-glass specular-shine">
+            <div class="stat-icon" data-icon="receipt"></div>
+            <div class="stat-info">
+              <div class="stat-label" id="statOrdersLabel">ຈຳນວນບິນທີ່ສຳເລັດ</div>
+              <div class="stat-value" id="statOrdersVal">0 ບິນ</div>
+            </div>
+          </div>
+
+          <div class="stat-card liquid-glass specular-shine">
+            <div class="stat-icon" data-icon="card"></div>
+            <div class="stat-info">
+              <div class="stat-label" id="statPaymentLabel">ແຍກການຊຳລະ</div>
+              <div class="stat-value" style="font-size:0.95rem;" id="statPaymentVal">BCEL: 0 | ເງິນສົດ: 0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Table Matrix Grid -->
+        <div class="table-matrix-card liquid-glass specular-shine">
+          <div class="section-label">
+            <span id="ownerTableGridLabel">ຜັງໂຕະສົດ (Live Table Matrix)</span>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button class="gold-primary-btn" style="height:28px; padding:2px 10px; font-size:0.75rem;" onclick="generateEodReport()" title="ສ້າງບົດສະຫຼຸບຍອດຂາຍສົ່ງເຂົ້າ WhatsApp/Facebook">
+                <i data-icon="sparkles"></i><span id="eodReportBtnText">ສະຫຼຸບຍອດ EOD Report</span>
+              </button>
+              <span class="gold-badge" id="tableCountBadge">16 ໂຕະ</span>
+            </div>
+          </div>
+
+          <div class="tables-grid" id="ownerTablesGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Live Activity Feed -->
+        <div class="activity-card liquid-glass specular-shine">
+          <div class="section-label">
+            <span id="liveFeedLabel">ລາຍການອັບເດດສົດ (Live Real-time Feed)</span>
+          </div>
+          <div class="activity-list" id="activityList">
+            <!-- Feed items -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════ KITCHEN DISPLAY SYSTEM (KDS) ══════════ -->
+      <section id="kitchenView" class="kitchen-view-grid" style="display: none;">
+        <!-- KDS Control Bar -->
+        <div class="kds-header-card liquid-glass specular-shine">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="gold-badge" style="font-size:0.75rem; background:rgba(239,68,68,0.25); border-color:#EF4444; color:#FCA5A5;">
+                <i data-icon="flame"></i> LIVE KDS
+              </span>
+              <span style="font-weight:800; font-size:1rem; color:var(--gold-200);" id="kdsTitleText">
+                ໜ້າຈໍຫ້ອງຄົວ & ປຸງແຕ່ງ (Kitchen Display System)
+              </span>
+            </div>
+            
+            <!-- Station Filter Tabs -->
+            <div class="kds-filter-tabs">
+              <button class="kds-tab-btn active" id="kdsTabAll" onclick="setKdsStationFilter('all')">
+                <span id="kdsFilterAll">ທັງໝົດ</span>
+              </button>
+              <button class="kds-tab-btn" id="kdsTabGrill" onclick="setKdsStationFilter('grill')">
+                <span>🥩 ປິ້ງ/ຊີ້ນ</span>
+              </button>
+              <button class="kds-tab-btn" id="kdsTabKitchen" onclick="setKdsStationFilter('kitchen')">
+                <span>🍲 ຄົວຮ້ອນ</span>
+              </button>
+              <button class="kds-tab-btn" id="kdsTabBar" onclick="setKdsStationFilter('bar')">
+                <span>🍺 ບາເຄື່ອງດື່ມ</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- KDS Ticket Grid -->
+        <div class="kds-tickets-container" id="kdsTicketsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Sticky Floating Cart Bar (Visible on Phones when items staged) -->
+    <div id="mobileFloatingCartBar" class="mobile-floating-cart" style="display:none;">
+      <div class="mfc-left" onclick="document.getElementById('stagedOrderBox').scrollIntoView({behavior:'smooth', block:'center'})">
+        <span class="mfc-badge" id="mfcCountBadge">0</span>
+        <div class="mfc-totals">
+          <div class="mfc-lak" id="mfcTotalLAK">0 ₭</div>
+          <div class="mfc-thb" id="mfcTotalTHB">≈ 0 ฿</div>
+        </div>
+      </div>
+      <button type="button" class="gold-primary-btn mfc-submit-btn" onclick="submitCurrentOrder()">
+        <i data-icon="sparkles"></i>
+        <span id="mfcSubmitText">ບັນທຶກລົງ ໂຕະ 1</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ══════════ Luxury Modal: Payment & Checkout (BCEL One & Cash & Split) ══════════ -->
+  <div id="checkoutModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine">
+      
+      <!-- Payment Method Switcher Tabs -->
+      <div class="pay-tabs-row">
+        <button id="payTabBcel" class="pay-tab-btn active" onclick="switchPaymentTab('bcel')">
+          <i data-icon="qr"></i>
+          <span>BCEL One / QR</span>
+        </button>
+        <button id="payTabCash" class="pay-tab-btn" onclick="switchPaymentTab('cash')">
+          <i data-icon="banknote"></i>
+          <span id="cashTabLabel">ເງິນສົດ (Cash)</span>
+        </button>
+        <button id="payTabSplit" class="pay-tab-btn" onclick="switchPaymentTab('split')">
+          <i data-icon="users"></i>
+          <span id="splitTabLabel">👑 ຫານບິນ (Smart Split)</span>
+        </button>
+      </div>
+
+      <!-- Tab Content 1: BCEL One / LAO QR -->
+      <div id="bcelContentSection" class="lao-qr-frame">
+        <div class="lao-qr-header">
+          <span class="lao-flag-badge" data-icon="flag-la"></span>
+          <span class="bcel-badge-title" id="checkoutBankTitle">BCEL One / LAO QR</span>
+        </div>
+        
+        <div class="qr-placeholder">
+          <img id="qrCodeImg" width="140" height="140" alt="BCEL One QR" style="display:block; margin:0 auto; border-radius:8px;">
+        </div>
+
+        <div id="checkoutAccInfo" style="color: #1A1305; font-size: 0.72rem; font-weight: 700; text-align: center; margin-top: 2px;">
+          01012-0000-8888-99 • KHAMTHONG SINDAD SHOP
+        </div>
+
+        <div style="color: #5C4314; font-size: 0.68rem; font-weight: 600; text-align: center; margin-top: 1px;" id="qrPromptText">
+          ສະແກນຈ່າຍດ້ວຍ BCEL One ຫຼື ທຸກທະນາຄານ
+        </div>
+      </div>
+
+      <!-- Tab Content 2: Cash Tender & Change Calculator -->
+      <div id="cashContentSection" class="cash-tender-box" style="display: none;">
+        <div class="section-label">
+          <span id="cashReceivedLabel">ຈຳນວນເງິນສົດທີ່ໄດ້ຮັບ</span>
+        </div>
+        
+        <div class="cash-input-row">
+          <span style="color:var(--gold-300); font-weight:800; font-size:1.2rem;">₭</span>
+          <input type="number" id="cashReceivedInput" class="cash-input-field" placeholder="0" oninput="calculateCashChange()">
+        </div>
+
+        <!-- Quick Cash Bills in Lao Kip -->
+        <div class="cash-quick-grid">
+          <div class="cash-pill-btn" onclick="addCashPreset(50000)">+50,000 ₭</div>
+          <div class="cash-pill-btn" onclick="addCashPreset(100000)">+100,000 ₭</div>
+          <div class="cash-pill-btn" onclick="addCashPreset(500000)">+500,000 ₭</div>
+          <div class="cash-pill-btn" onclick="setCashExact()">ພໍດີ (Exact)</div>
+          <div class="cash-pill-btn" onclick="addCashPreset(200000)">+200,000 ₭</div>
+          <div class="cash-pill-btn" style="color:#F87171;" onclick="clearCashTender()">ລຶບ (Clear)</div>
+        </div>
+
+        <div class="change-display-row">
+          <span id="changeTextLabel">ເງິນທອນ (Change):</span>
+          <span id="changeAmountVal" style="font-size:1.3rem;">0 ₭</span>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Smart Split Bill (VIP Exclusive) -->
+      <div id="splitContentSection" class="split-bill-box" style="display: none;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.75rem; font-weight:700; color:var(--gold-300);" id="splitPayerLabel">ເລືອກຈຳນວນຄົນຫານ (Split Payers)</span>
+          <span class="gold-badge" style="font-size:0.65rem;">👑 VIP PRO</span>
+        </div>
+
+        <!-- Quick Payer Buttons -->
+        <div class="split-quick-row">
+          <button type="button" class="split-pill-btn active" id="splitBtn2" onclick="setSplitCount(2)">2 ຄົນ</button>
+          <button type="button" class="split-pill-btn" id="splitBtn3" onclick="setSplitCount(3)">3 ຄົນ</button>
+          <button type="button" class="split-pill-btn" id="splitBtn4" onclick="setSplitCount(4)">4 ຄົນ</button>
+          <button type="button" class="split-pill-btn" id="splitBtn5" onclick="setSplitCount(5)">5 ຄົນ</button>
+          <button type="button" class="split-pill-btn" id="splitBtn6" onclick="setSplitCount(6)">6 ຄົນ</button>
+        </div>
+
+        <!-- Per Person Breakdown Box -->
+        <div class="split-result-card">
+          <div style="font-size:0.72rem; color:var(--text-muted);" id="splitPerPersonLabel">ຍອດຈ່າຍສະເລ່ຍຕໍ່ຄົນ:</div>
+          <div style="font-size:1.6rem; font-weight:900; color:var(--gold-200);" id="splitPerPersonLAK">0 ₭</div>
+          <div style="font-size:0.75rem; color:var(--gold-300);" id="splitPerPersonTHB">≈ 0 บาท / ຄົນ</div>
+        </div>
+
+        <!-- Split Dynamic QR -->
+        <div style="text-align:center; padding:6px; background:#FFF; border-radius:8px; width:135px; margin:0 auto; box-shadow:0 4px 15px rgba(0,0,0,0.5);">
+          <img id="splitQrCodeImg" width="120" height="120" alt="Split QR" style="display:block; margin:0 auto; border-radius:4px;">
+          <div style="font-size:0.6rem; font-weight:800; color:#1A1305;" id="splitQrLabel">ສະແກນຈ່າຍຍອດຄົນດຽວ</div>
+        </div>
+
+        <!-- Interactive Checklist of Paid Persons -->
+        <div class="split-checklist-container" id="splitChecklistWrap">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Amount Summary -->
+      <div style="text-align: center;">
+        <div style="font-size: 0.8rem; color: var(--text-muted);" id="modalTableOrOrderId">ໂຕະ 1</div>
+        <div style="font-size: 2.2rem; font-weight: 800; color: var(--gold-300);" id="modalAmountLAK">0 ₭</div>
+        <div style="font-size: 0.85rem; color: var(--gold-200);" id="modalAmountTHB">≈ 0 บาท</div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 8px; width: 100%;">
+        <button class="gold-primary-btn" style="flex: 1;" onclick="confirmCheckoutPayment()">
+          <span id="confirmPayBtnText">ຢືນຢັນຮັບເງິນສຳເລັດ</span>
+        </button>
+        <button class="num-btn" style="width: 48px; font-size: 1.1rem;" title="ພິມໃບບິນ" onclick="printReceiptForCurrentOrder()">
+          <i data-icon="printer"></i>
+        </button>
+        <button class="num-btn" style="width: 48px; font-size: 1rem;" onclick="closeCheckoutModal()">
+          <i data-icon="x"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Table Inspector (View & Void Items) ══════════ -->
+  <div id="tableInspectModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine">
+      <div class="section-label">
+        <span id="inspectModalTitle" style="font-size:1.1rem; color:var(--gold-200);">ລາຍລະອຽດ ໂຕະ 1</span>
+        <span id="inspectTableStatusBadge" class="gold-badge">ກຳລັງກິນ</span>
+      </div>
+
+      <div class="table-inspect-items-list" id="inspectItemsList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="change-display-row" style="background:rgba(212, 175, 55, 0.15); border-color:var(--gold-400); color:var(--gold-200);">
+        <span>ຍອດລວມທັງໝົດ:</span>
+        <span id="inspectModalTotal" style="font-size:1.2rem; font-weight:800;">0 ₭</span>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="gold-primary-btn" style="flex:1;" onclick="checkoutFromInspector()">
+          <i data-icon="card"></i>
+          <span id="inspectCheckoutBtnText">ເຊັກບິນໂຕະນີ້</span>
+        </button>
+        <button class="num-btn" style="width: 50px;" onclick="closeTableInspector()"><i data-icon="x"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Store Settings (ການຕັ້ງຄ່າຮ້ານ) ══════════ -->
+  <div id="settingsModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-height: calc(100vh - 24px); overflow-y: auto;">
+      <div class="section-label">
+        <span class="modal-title"><i data-icon="settings"></i><span id="settingsModalTitle">ການຕັ້ງຄ່າຮ້ານ (Settings)</span></span>
+        <button class="gold-badge" style="cursor:pointer;" onclick="closeSettingsModal(); openMenuManager();">
+          <i data-icon="pot"></i><span>ຈັດການເມນູ</span>
+        </button>
+      </div>
+
+      <div class="settings-grid-2col">
+        <div class="settings-field-group" style="grid-column: span 2;">
+          <label class="settings-label" id="settingLabelStoreName">ຊື່ຮ້ານ (Store Name)</label>
+          <input type="text" id="settingStoreNameLo" class="settings-input" value="ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ">
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelPhone">ເບີໂທ / WhatsApp ຮ້ານຄ້າ</label>
+          <input type="text" id="settingPhone" class="settings-input" placeholder="+856 20 ... / 08x-xxx-xxxx" value="+856 20 5555 9999">
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelLocation">ເມືອງ / ແຂວງ (จังหวัด)</label>
+          <input type="text" id="settingLocation" class="settings-input" placeholder="ວຽງຈັນ / ປາກເຊ / ອຸດອນ..." value="ນະຄອນຫຼວງວຽງຈັນ">
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelRate">ອັດຕາແລກປ່ຽນ (1฿ = ?₭)</label>
+          <input type="number" id="settingExchangeRate" class="settings-input" value="630">
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelTare">ຫັກຊາມ (Tare kg)</label>
+          <input type="number" step="0.01" id="settingTareWeight" class="settings-input" value="0.15">
+        </div>
+
+        <!-- Bank & QR Payment Section -->
+        <div class="settings-field-group" style="grid-column: span 2; border-top: 1px dashed rgba(245, 208, 97, 0.25); padding-top: 8px; margin-top: 4px;">
+          <div style="font-size:0.78rem; font-weight:700; color:var(--gold-300); display:flex; align-items:center; gap:6px;">
+            <i data-icon="qr"></i><span id="settingHeaderBank">ຕັ້ງຄ່າບັນຊີທະນາຄານ & QR Code ຮັບເງິນ</span>
+          </div>
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelBankName">ຊື່ທະນາຄານ (Bank Name)</label>
+          <input type="text" id="settingBankName" class="settings-input" placeholder="BCEL One / LAO QR" value="BCEL One / LAO QR">
+        </div>
+
+        <div class="settings-field-group">
+          <label class="settings-label" id="settingLabelBankAcc">ເລກບັນຊີ / ID ຮັບເງິນ</label>
+          <input type="text" id="settingBankAccountNumber" class="settings-input" placeholder="01012-0000-8888-99" value="01012-0000-8888-99">
+        </div>
+
+        <div class="settings-field-group" style="grid-column: span 2;">
+          <label class="settings-label" id="settingLabelBankAccName">ຊື່ເຈົ້າຂອງບັນຊີ (Account Name)</label>
+          <input type="text" id="settingBankAccountName" class="settings-input" placeholder="KHAMTHONG SHOP" value="KHAMTHONG SINDAD SHOP">
+        </div>
+
+        <div class="settings-field-group" style="grid-column: span 2;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <label class="settings-label" id="settingLabelCustomQr">ຮູບພາບ QR Code ຮັບເງິນຂອງຮ້ານ (Custom QR Code)</label>
+            <span id="qrStatusBadge" style="font-size:0.65rem; color:var(--gold-300);">Auto Dynamic QR</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <input type="text" id="settingCustomQrImg" class="settings-input" placeholder="ວາງ Link ຮູບພາບ ຫຼື ກົດປຸ່ມອັບໂຫຼດ..." style="flex:1;">
+            <input type="file" id="settingCustomQrFileInput" accept="image/*" style="display:none;" onchange="handleQrFileUpload(event)">
+            <button type="button" class="num-btn" style="height:32px; padding:0 8px; font-size:0.75rem; white-space:nowrap;" onclick="document.getElementById('settingCustomQrFileInput').click()" title="ອັບໂຫຼດຮູບ QR ຈາກເຄື່ອງ">
+              <i data-icon="camera"></i> <span>ອັບໂຫຼດຮູບ</span>
+            </button>
+            <button type="button" class="num-btn" style="height:32px; width:32px; font-size:0.75rem; color:#EF4444;" onclick="clearCustomQrImage()" title="ລຶບຮູບ QR">
+              <i data-icon="trash"></i>
+            </button>
+          </div>
+          <div id="qrPreviewWrap" style="display:none; margin-top:6px; align-items:center; gap:8px;">
+            <img id="qrPreviewImg" src="" style="width:48px; height:48px; border-radius:6px; border:1px solid var(--gold-400); object-fit:contain; background:#FFF;">
+            <span style="font-size:0.7rem; color:var(--text-muted);" id="qrPreviewText">ຮູບ QR ພ້ອມໃຊ້ງານ</span>
+          </div>
+        </div>
+
+        <!-- Meat Price overrides (if in BBQ mode) -->
+        <div class="settings-field-group" id="settingPriceMixedGroup">
+          <label class="settings-label" id="settingLabelPriceMixed">ລາຄາຊີ້ນລວມ (₭ / kg)</label>
+          <input type="number" id="settingPriceMixed" class="settings-input" value="95000">
+        </div>
+
+        <div class="settings-field-group" id="settingPricePremGroup">
+          <label class="settings-label" id="settingLabelPricePremium">ລາຄາພຣີມ່ຽມ (₭ / kg)</label>
+          <input type="number" id="settingPricePremium" class="settings-input" value="145000">
+        </div>
+
+        <!-- Local Storage Info & Admin CRM Trigger -->
+        <div class="settings-field-group" style="grid-column: span 2; border-top: 1px dashed rgba(245, 208, 97, 0.25); padding-top: 8px; margin-top: 2px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+            <span style="font-size:0.7rem; color:#34D399; font-weight:700;" id="localStoreStatusText">
+              💾 ຂໍ້ມູນຮ້ານບັນທຶກລົງເຄື່ອງນີ້ອັດຕະໂນມັດ (Offline-Ready)
+            </span>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="num-btn" style="height:28px; padding:0 10px; font-size:0.68rem; color:var(--gold-200); border-color:rgba(245,208,97,0.4);" onclick="closeSettingsModal(); openLeadsCrmModal();">
+                🕵️‍♂️ <span>ดูรายชื่อร้านที่เอาไปใช้ (Admin CRM)</span>
+              </button>
+              <button type="button" class="num-btn" style="height:28px; padding:0 8px; font-size:0.68rem; color:#FCA5A5;" onclick="resetLocalDeviceStore()">
+                🔄 <span>รีเซ็ตค่าเริ่มต้น</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-actions-row">
+        <button class="gold-primary-btn" onclick="saveStoreSettings()" style="flex:1;">
+          <i data-icon="save"></i><span id="saveSettingsBtnText">ບັນທຶກການຕັ້ງຄ່າ</span>
+        </button>
+        <button class="btn-void" style="padding:10px 14px; font-size:0.8rem;" onclick="closeDailyRegister()">
+          <i data-icon="alert"></i><span id="closeRegisterBtnText">ປິດຍອດປະຈຳວັນ</span>
+        </button>
+        <button class="num-btn" style="height:44px; width:44px; font-size:1.1rem;" onclick="closeSettingsModal()">
+          <i data-icon="x"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Quick Exchange Rate Switcher ══════════ -->
+  <div id="exchangeRateModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-width: 380px;">
+      <div class="section-label">
+        <span class="modal-title"><i data-icon="banknote"></i><span id="rateModalTitle">ປ່ຽນອັດຕາແລກປ່ຽນ (THB ⇋ LAK)</span></span>
+        <span class="gold-badge">Live Sync</span>
+      </div>
+      <p style="font-size:0.75rem; color:var(--text-muted); margin:0;" id="rateModalDesc">
+        ກຳນົດຄ່າ 1 ບາດ (THB) ເທົ່າກັບຈັກກີບ (LAK) ສຳລັບຄຳນວນໃນໃບບິນ ແລະ ຍອດຂາຍທັນທີ
+      </p>
+      
+      <div class="rate-quick-chips">
+        <button class="rate-chip-btn" onclick="setQuickRate(600)">600 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(630)">630 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(650)">650 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(680)">680 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(700)">700 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(750)">750 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(800)">800 ₭</button>
+        <button class="rate-chip-btn" onclick="setQuickRate(1000)">1,000 ₭</button>
+      </div>
+
+      <div class="rate-input-box">
+        <span style="font-weight:800; color:var(--gold-300); font-size:1.1rem;">1 ฿ =</span>
+        <input type="number" id="quickExchangeRateInput" class="cash-input-field" style="font-size:1.4rem; color:#FFF;" value="630">
+        <span style="font-weight:700; color:var(--gold-200);">₭ (LAK)</span>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button class="gold-primary-btn" style="flex:1;" onclick="saveExchangeRateQuick()">
+          <i data-icon="save"></i><span id="saveRateBtnText">ອັບເດດຄ່າເງິນທັນທີ</span>
+        </button>
+        <button class="num-btn" style="width:44px;" onclick="closeExchangeRateModal()"><i data-icon="x"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Menu & Concept Manager ══════════ -->
+  <div id="menuManagerModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-width: 580px; max-height: calc(100vh - 20px);">
+      <div class="section-label">
+        <span class="modal-title"><i data-icon="pot"></i><span id="menuModalTitle">ຈັດການເມນູ & ຮູບແບບຮ້ານ (Menu Manager)</span></span>
+        <span class="gold-badge" id="currentConceptBadge">ຊິ້ນດາດ</span>
+      </div>
+
+      <!-- Tab Switcher inside Menu Manager -->
+      <div class="pay-tabs-row" style="margin-bottom: 4px;">
+        <button class="pay-tab-btn active" id="menuTabConceptBtn" onclick="switchMenuManagerTab('concepts')">
+          <i data-icon="grid"></i><span id="tabConceptLabel">ຮູບແບບຮ້ານ (Concepts)</span>
+        </button>
+        <button class="pay-tab-btn" id="menuTabItemsBtn" onclick="switchMenuManagerTab('items')">
+          <i data-icon="pot"></i><span id="tabItemsLabel">ລາຍການເມນູ (Menu Items)</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Concept Presets -->
+      <div id="menuConceptSection" style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-size:0.75rem; color:var(--text-muted);" id="conceptDescText">
+          ເລືອກຮູບແບບຮ້ານເພື່ອໂຫຼດເມນູ ແລະ ລະບົບທີ່ເໝາະສົມທັນທີ (1-Click Switch):
+        </div>
+
+        <div class="concept-presets-grid">
+          <div class="concept-card active" id="conceptCard_sindad" onclick="applyStorePreset('sindad')">
+            <div class="concept-card-icon"><i data-icon="drumstick"></i></div>
+            <div class="concept-card-title">ຊີ້ນດາດ & ປິ້ງຍ່າງ</div>
+            <div class="concept-card-sub">ຊັ່ງກິໂລ, ນ້ຳແຈ່ວ, ເບຍລາວ, ຂອງແຖມ</div>
+          </div>
+          <div class="concept-card" id="conceptCard_restaurant" onclick="applyStorePreset('restaurant')">
+            <div class="concept-card-icon"><i data-icon="pot"></i></div>
+            <div class="concept-card-title">ຮ້ານອາຫານ & ຕາມສັ່ງ</div>
+            <div class="concept-card-sub">ອາຫານຈານດ່ວນ, ຕົ້ມຍຳ, ປາທອດ, ເຄື່ອງດື່ມ</div>
+          </div>
+          <div class="concept-card" id="conceptCard_cafe" onclick="applyStorePreset('cafe')">
+            <div class="concept-card-icon"><i data-icon="coffee"></i></div>
+            <div class="concept-card-title">ຄາເຟ່ & ເຄື່ອງດື່ມ</div>
+            <div class="concept-card-sub">ກາເຟສົດ, ຊາໄທ, ເບເກີຣີ່, ຂອງຫວານ</div>
+          </div>
+          <div class="concept-card" id="conceptCard_bar" onclick="applyStorePreset('bar')">
+            <div class="concept-card-icon"><i data-icon="beer"></i></div>
+            <div class="concept-card-title">ບາ & ເບຍກາດເດັນ</div>
+            <div class="concept-card-sub">ເບຍທາວເວີ, ຄັອກເທວ, ກັບແກ້ມ, ดนตรีสด</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Custom Items List & Add Form -->
+      <div id="menuItemsSection" style="display: none; flex-direction: column; gap: 10px;">
+        <!-- Add New Item Form -->
+        <div class="add-item-form-box">
+          <div style="font-size: 0.8rem; font-weight:700; color:var(--gold-300);">+ ເພີ່ມລາຍການເມນູໃໝ່ (Add Item)</div>
+          <div class="settings-grid-2col" style="gap:6px;">
+            <input type="text" id="newItemNameLo" class="settings-input" placeholder="ຊື່ເມນູ (ລາວ) ເຊັ່ນ: ເຂົ້າຜັດ" style="padding:6px 10px;">
+            <input type="text" id="newItemNameTh" class="settings-input" placeholder="ชื่อเมนู (ไทย) เช่น: ข้าวผัด" style="padding:6px 10px;">
+            <input type="number" id="newItemPrice" class="settings-input" placeholder="ລາຄາ (₭) ເຊັ່ນ: 35000" style="padding:6px 10px;">
+            <select id="newItemCategory" class="settings-input" style="padding:6px 10px; background:#1E1810; color:#FFF;">
+              <option value="main_dishes">ອາຫານຈານຫຼັກ / ອາຫານດ່ວນ</option>
+              <option value="drinks">ເຄື່ອງດື່ມ (Drinks)</option>
+              <option value="addons">ເຄື່ອງຄຽງ / ບໍລິການ</option>
+              <option value="freebies">ຂອງແຖມ (Freebies 0 ₭)</option>
+              <option value="desserts">ຂອງຫວານ / ເບເກີຣີ່</option>
+            </select>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span style="font-size:0.75rem; color:var(--text-muted);">ໄອຄອນ:</span>
+              <select id="newItemIcon" class="settings-input" style="padding:4px 8px; font-size:0.75rem; background:#1E1810; color:#FFF;">
+                <option value="pot">🍲 หม้อ/ต้ม</option>
+                <option value="drumstick">🍗 เนื้อ/ไก่</option>
+                <option value="flame">🔥 ย่าง/ทอด/ผัด</option>
+                <option value="beer">🍺 เบียร์</option>
+                <option value="coffee">☕ กาแฟ/ชา</option>
+                <option value="soda">🥤 น้ำหวาน/โซดา</option>
+                <option value="leaf">🥬 ผัก/สด</option>
+                <option value="fish">🐟 ปลา/ซีฟู้ด</option>
+                <option value="gift">🎁 ของแถม</option>
+              </select>
+            </div>
+            <button class="gold-primary-btn" style="height:34px; padding:4px 12px; font-size:0.8rem;" onclick="addNewMenuItemFromForm()">
+              <i data-icon="plus"></i><span>ເພີ່ມລາຍການ</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Menu Items List -->
+        <div class="menu-editor-items-list" id="menuEditorItemsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display:flex; gap:8px; margin-top:4px;">
+        <button class="gold-primary-btn" style="flex:1;" onclick="closeMenuManager()">
+          <i data-icon="check"></i><span>ສຳເລັດ (Done)</span>
+        </button>
+        <button class="num-btn" style="width:44px;" onclick="closeMenuManager()"><i data-icon="x"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: VIP PRO Upgrade & Licensing ══════════ -->
+  <div id="vipUpgradeModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-width: 470px; max-height: calc(100vh - 16px); overflow-y: auto; padding: 10px 14px; gap: 6px;">
+      <div class="vip-modal-header" style="margin-bottom: 2px;">
+        <div class="vip-badge-glow" style="padding: 2px 8px; font-size: 0.72rem;"><i data-icon="crown"></i> VIP PRO</div>
+        <h2 style="margin:2px 0 0; font-size:1.15rem; color:var(--gold-200);">KhamThong POS VIP PRO</h2>
+        <p style="margin:1px 0 0; font-size:0.72rem; color:var(--text-muted);" id="vipModalSubtitle">
+          ຍົກລະດັບຮ້ານອາຫານຂອງທ່ານສູ່ມາດຕະຖານ Luxury 5 ດາວ
+        </p>
+      </div>
+
+      <!-- Comparison Matrix -->
+      <div class="vip-features-table" style="padding: 6px 10px; gap: 4px;">
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">✨ ສັບປ່ຽນ 4 ຮູບແບບຮ້ານ (ໝູກະທະ, ຕາມສັ່ງ, ຄາເຟ່, ບາ)</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">🔥 ໜ້າຈໍຄົວສົດ Kitchen Display System (KDS) ບໍ່ຕ້ອງຊື້ເຄື່ອງພິມ</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">👑 ລະບົບຫານບິນອັດສະລິຍະ (Smart Split Bill) + QR ລາຍຄົນ</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">⏱️ ເຣດາຈັບເວລາໂຕະ & ເຕືອນນັ່ງເກີນເວລາບຸບເຟ່ (Table Radar)</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">🛡️ ລະບົບ PIN ຜູ້ຈັດການ (8888) ປ້ອງກັນພະນັກງານໂກງບິນ 100%</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">📊 ລາຍງານສະຫຼຸບຍອດ EOD ສົ່ງເຂົ້າ Facebook / WhatsApp ໃນ 1 ຄລິກ</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+        <div class="vip-feature-row">
+          <span class="vip-feat-title">⚡ ຄວາມໄວລະດັບ 120fps ProMotion ບໍ່ມີກະຕຸກ ລື່ນໄຫຼທຸກອຸປະກອນ</span>
+          <span class="vip-feat-check">✓ VIP</span>
+        </div>
+      </div>
+
+      <!-- Pricing Plans -->
+      <div class="vip-pricing-cards-row" style="gap: 6px;">
+        <div class="vip-price-card" style="padding: 6px 8px;">
+          <div class="vip-plan-name" style="font-size: 0.7rem;">ລາຍປີ (Annual)</div>
+          <div class="vip-price-num" style="font-size: 1rem; margin: 1px 0;">1,990 ฿ <span style="font-size:0.65rem; color:var(--text-muted);">/ ປີ</span></div>
+          <div style="font-size:0.65rem; color:var(--gold-300);">≈ 1,390,000 ₭</div>
+        </div>
+        <div class="vip-price-card highlight" style="padding: 6px 8px;">
+          <div class="vip-popular-tag" style="top: -6px; font-size: 0.58rem; padding: 0 6px;">ນິຍົມທີ່ສຸດ (Best Value)</div>
+          <div class="vip-plan-name" style="font-size: 0.7rem;">ຕະຫຼອດຊີບ (Lifetime)</div>
+          <div class="vip-price-num" style="font-size: 1rem; margin: 1px 0;">3,990 ฿ <span style="font-size:0.65rem; color:#FFF;">ຄັ້ງດຽວ</span></div>
+          <div style="font-size:0.65rem; color:var(--gold-200);">≈ 2,790,000 ₭ (ບໍ່ມີລາຍເດືອນ)</div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <a href="https://www.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=61593675035929&sk=about" target="_blank" rel="noopener noreferrer" class="gold-primary-btn" style="text-decoration:none; height:34px; font-size:0.78rem;">
+          <i data-icon="sparkles"></i><span id="contactVipBtnText">ຕິດຕໍ່ອັບເກຣດຜ່ານ Mason BizApp Facebook</span>
+        </a>
+        
+        <div style="display:flex; gap:6px;">
+          <input type="text" id="vipLicenseKeyInput" class="settings-input" placeholder="ໃສ່ລະຫັດ VIP License Key..." style="flex:1; padding:5px 10px; font-size:0.75rem; height:32px;">
+          <button class="num-btn" style="padding:0 12px; font-size:0.75rem; font-weight:700; height:32px;" onclick="activateVipLicense()">
+            ປົດລັອກ
+          </button>
+          <button class="num-btn" style="width:36px; height:32px; font-size:0.75rem;" onclick="closeVipUpgradeModal()"><i data-icon="x"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Quick Shop Registration & Local Save Onboarding ══════════ -->
+  <div id="shopRegisterModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-width: 440px;">
+      <div class="section-label">
+        <span class="modal-title"><span>📝</span> <span id="regModalTitle">ຕັ້ງຄ່າຊື່ຮ້ານຂອງທ່ານ (Save ລົງເຄື່ອງນີ້)</span></span>
+        <span class="gold-badge">💾 Auto-Save</span>
+      </div>
+      <p style="font-size:0.74rem; color:var(--text-muted); margin:0;" id="regModalDesc">
+        ຂໍ້ມູນຮ້ານ, ເມນູ, ຮູບ QR ແລະ ຍອດຂາຍຂອງທ່ານຈະຖືກບັນທຶກລົງໃນເຄື່ອງນີ້ໂດຍອັດຕະໂນມັດ (ແຍກອິດສະຫຼະ ບໍ່ປົນກັບຮ້ານອື່ນ ແລະ ໃຊ້ງານໄດ້ຕະຫຼອດເຖິງເນັດຫຼຸດ!)
+      </p>
+
+      <div class="settings-grid-2col" style="gap:8px; margin-top:4px;">
+        <div class="settings-field-group" style="grid-column: span 2;">
+          <label class="settings-label" id="regLabelStoreName">ຊື່ຮ້ານຄ້າ (Store Name) *</label>
+          <input type="text" id="regStoreNameInput" class="settings-input" placeholder="ເຊັ່ນ: ຮ້ານຊີ້ນດາດ ອ້າຍຄຳ / คาเฟ่คำทอง">
+        </div>
+        <div class="settings-field-group">
+          <label class="settings-label" id="regLabelOwner">ຊື່ເຈົ້າຂອງຮ້ານ / ຜູ້ຕິດຕໍ່</label>
+          <input type="text" id="regOwnerNameInput" class="settings-input" placeholder="ເຊັ່ນ: ອ້າຍຄຳ / คุณสมชาย">
+        </div>
+        <div class="settings-field-group">
+          <label class="settings-label" id="regLabelPhone">ເບີໂທ / WhatsApp / Line *</label>
+          <input type="text" id="regPhoneInput" class="settings-input" placeholder="+856 20 ... / 08x-xxx-xxxx">
+        </div>
+        <div class="settings-field-group">
+          <label class="settings-label" id="regLabelLocation">ເມືອງ / ແຂວງ (จังหวัด)</label>
+          <input type="text" id="regLocationInput" class="settings-input" placeholder="ວຽງຈັນ / ປາກເຊ / ກທມ...">
+        </div>
+        <div class="settings-field-group">
+          <label class="settings-label" id="regLabelConcept">ປະເພດຮ້ານຄ້າ</label>
+          <select id="regConceptSelect" class="settings-input" style="background:#1E1810; color:#FFF;">
+            <option value="sindad">🥩 ໝູກະທະ & ຊັ່ງກິໂລ</option>
+            <option value="restaurant">🍲 ຮ້ານອາຫານ & ຕາມສັ່ງ</option>
+            <option value="cafe">☕ ຄາເຟ່ & ກາເຟ</option>
+            <option value="bar">🍺 ບາ & ຮ້ານເຫຼົ້າ</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <button type="button" class="gold-primary-btn" style="flex:1;" onclick="submitShopRegistration()">
+          <i data-icon="check"></i><span id="regSubmitBtnText">ບັນທຶກຂໍ້ມູນຮ້ານລົງເຄື່ອງນີ້</span>
+        </button>
+        <button type="button" class="num-btn" style="width:44px;" onclick="closeShopRegisterModal()"><i data-icon="x"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Modal: Mason BizApp Developer / Admin Lead CRM Dashboard ══════════ -->
+  <div id="leadsCrmModal" class="modal-overlay">
+    <div class="modal-card liquid-glass specular-shine" style="max-width: 760px; max-height: calc(100vh - 20px); overflow-y: auto;">
+      <div class="section-label">
+        <span class="modal-title"><span>🕵️‍♂️</span> <span id="crmModalTitle">Mason BizApp — ระบบหลังบ้านเก็บข้อมูลร้านค้าที่เอาไปใช้ (Customer CRM)</span></span>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button type="button" class="gold-badge" style="cursor:pointer;" onclick="exportLeadsToCsv()">
+            📥 <span>Export Excel (CSV)</span>
+          </button>
+          <button type="button" class="num-btn" style="width:32px; height:28px; font-size:0.8rem;" onclick="closeLeadsCrmModal()"><i data-icon="x"></i></button>
+        </div>
+      </div>
+
+      <p style="font-size:0.72rem; color:var(--text-muted); margin:0;">
+        ทุกครั้งที่มีคนเปิดลิงก์ใช้งาน ตั้งชื่อร้าน หรือกดคิดเงิน ข้อมูลร้านและสถิติการใช้งานจะถูกส่งกลับมาเก็บไว้ที่นี่อัตโนมัติ เพื่อให้คุณทักไปปิดการขายแพ็กเกจ <b>VIP PRO (1,990฿ - 3,990฿)</b> ได้ทันที!
+      </p>
+
+      <!-- CRM Summary Stats -->
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin:6px 0;">
+        <div style="background:rgba(245,208,97,0.08); border:1px solid rgba(245,208,97,0.25); border-radius:10px; padding:8px 12px;">
+          <div style="font-size:0.68rem; color:var(--text-muted);">ร้านค้าที่เข้าใช้งานทั้งหมด</div>
+          <div style="font-size:1.3rem; font-weight:900; color:var(--gold-200);" id="crmTotalShopsVal">0 ร้าน</div>
+        </div>
+        <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.35); border-radius:10px; padding:8px 12px;">
+          <div style="font-size:0.68rem; color:#FCD34D;">🔥 ลูกค้าเป้าหมาย (Hot Leads)</div>
+          <div style="font-size:1.3rem; font-weight:900; color:#FBBF24;" id="crmHotLeadsVal">0 ร้าน</div>
+        </div>
+        <div style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); border-radius:10px; padding:8px 12px;">
+          <div style="font-size:0.68rem; color:#6EE7B7;">👑 อัปเกรดเป็น VIP แล้ว</div>
+          <div style="font-size:1.3rem; font-weight:900; color:#34D399;" id="crmVipShopsVal">0 ร้าน</div>
+        </div>
+      </div>
+
+      <!-- Leads List Container -->
+      <div id="crmLeadsListContainer" style="display:flex; flex-direction:column; gap:8px; max-height:360px; overflow-y:auto; padding-right:2px;">
+        <!-- Populated dynamically by renderLeadsCrmModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ Thermal Receipt Print Format (58mm / 80mm) ══════════ -->
+  <div id="thermalReceipt">
+    <div class="receipt-header">
+      <div id="receiptVipBadge" style="display:none; font-size:10px; font-weight:bold; border:1px solid #000; padding:2px; margin-bottom:4px; text-align:center;">👑 VIP PRO CERTIFIED STORE</div>
+      <h2 id="receiptStoreName">ຄຳທອງ ຊິ້ນດາດ</h2>
+      <div id="receiptStoreTagline">ຊີ້ນດາດຊັ່ງກິໂລ ນ້ຳແຈ່ວລົດເດັດ ວຽງຈັນ</div>
+      <div id="receiptStorePhone">ໂທ: +856 20 5555 9999</div>
+      <div id="receiptDateTime">14/10/2026 22:30</div>
+      <div id="receiptBillNo" style="font-weight:bold; margin-top:4px;">ບິນເລກທີ: #TB1-1024</div>
+      <div id="receiptTableName" style="font-weight:bold;">ໂຕະ 1 (ກິນຢູ່ຮ້ານ)</div>
+    </div>
+
+    <div class="receipt-divider"></div>
+
+    <div id="receiptItemsList">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="receipt-divider"></div>
+
+    <div class="receipt-line receipt-total">
+      <span>ຍອດລວມທັງໝົດ:</span>
+      <span id="receiptTotalLAK">0 ₭</span>
+    </div>
+    <div class="receipt-line">
+      <span>(ທຽບເທົ່າເງິນບາດ):</span>
+      <span id="receiptTotalTHB">≈ 0 บาท</span>
+    </div>
+    <div class="receipt-line">
+      <span>ຮູບແບບການຈ່າຍ:</span>
+      <span id="receiptPaymentMethod">BCEL One</span>
+    </div>
+
+    <div class="receipt-footer">
+      <div>*** ຂອບໃຈທີ່ມາອຸດໜູນ ***</div>
+      <div>ໂອກາດໜ້າເຊີນໃໝ່ເດີເຈົ້າ</div>
+    </div>
+  </div>
+
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

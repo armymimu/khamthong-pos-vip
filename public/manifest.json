@@ -1,0 +1,16 @@
+{
+  "name": "ຄຳທອງ ຊິ້ນດາດ - KhamThong SinDad POS",
+  "short_name": "ຄຳທອງ POS",
+  "description": "ລະບົບ POS & ຊັ່ງກິໂລ ສຳລັບຮ້ານຊີ້ນດາດ Luxury Gold",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090807",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

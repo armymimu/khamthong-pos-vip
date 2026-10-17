@@ -1,0 +1,674 @@
+{
+  "settings": {
+    "storeNameLo": "ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ",
+    "storeNameTh": "คำทอง ชี้นดาด & ปิ้งย่าง",
+    "taglineLo": "ຊີ້ນດາດຊັ່ງກິໂລ ນ້ຳແຈ່ວລົດເດັດ ວຽງຈັນ",
+    "taglineTh": "หมูกระทะชั่งกิโล น้ำจิ้มรสเด็ด เวียงจันทน์",
+    "phone": "+856 20 5555 9999",
+    "addressLo": "ຖະໜົນ ໄກສອນ ພົມວິຫານ, ນະຄອນຫຼວງວຽງຈັນ",
+    "addressTh": "ถนน ไกรสอน พรหมวิหาร, นครหลวงเวียงจันทน์",
+    "currency": "LAK",
+    "exchangeRate": 630,
+    "defaultTareWeight": 0.15,
+    "bankAccountName": "KHAMTHONG LUXURY RESTAURANT",
+    "bankAccountNumber": "01012-7777-9999-01",
+    "bankName": "BCEL One VIP (ທະນາຄານການຄ້າຕ່າງປະເທດລາວ)",
+    "customQrImg": "",
+    "isVipLicensed": true,
+    "vipLicenseKey": "VIP888",
+    "storeConcept": "sindad",
+    "scaleMode": true
+  },
+  "menu": {
+    "meatGrades": [
+      {
+        "id": "mixed",
+        "nameLo": "ຊີ້ນລວມ (ໝູ/ໄກ່/ລູກຊີ້ນ)",
+        "nameTh": "หมูหมักรวม (หมู/ไก่/ตับ/ลูกชิ้น)",
+        "priceLAK": 95000,
+        "unit": "kg",
+        "icon": "drumstick"
+      },
+      {
+        "id": "premium",
+        "nameLo": "ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ",
+        "nameTh": "เนื้อวัวพรีเมียม & ซีฟู้ดกุ้งหมึก",
+        "priceLAK": 145000,
+        "unit": "kg",
+        "icon": "gem"
+      },
+      {
+        "id": "pork_belly",
+        "nameLo": "ສາມຊັ້ນໝັກງາພິເສດ",
+        "nameTh": "สามชั้นสไลซ์หมักงาเกาหลี",
+        "priceLAK": 115000,
+        "unit": "kg",
+        "icon": "layers"
+      },
+      {
+        "id": "seafood_fresh",
+        "nameLo": "ກຸ້ງແມ່ນ້ຳ & ປາໝຶກສົດ",
+        "nameTh": "กุ้งแม่น้ำ & หมึกกล้วยสด",
+        "priceLAK": 160000,
+        "unit": "kg",
+        "icon": "fish"
+      }
+    ],
+    "categories": [
+      {
+        "id": "drinks",
+        "nameLo": "ເຄື່ອງດື່ມ",
+        "nameTh": "เครื่องดื่ม",
+        "items": [
+          {
+            "id": "b1",
+            "nameLo": "ເບຍລາວ ໃຫຍ່ (Beerlao 640ml)",
+            "nameTh": "เบียร์ลาว ขวดใหญ่",
+            "priceLAK": 18000,
+            "icon": "beer"
+          },
+          {
+            "id": "b2",
+            "nameLo": "ເບຍລາວ Gold (ຂວດ)",
+            "nameTh": "เบียร์ลาว โกลด์",
+            "priceLAK": 22000,
+            "icon": "beer"
+          },
+          {
+            "id": "b3",
+            "nameLo": "ເບຍລາວ Dark (ດຳ)",
+            "nameTh": "เบียร์ลาว ดำ",
+            "priceLAK": 22000,
+            "icon": "beer"
+          },
+          {
+            "id": "w1",
+            "nameLo": "ນ້ຳດື່ມຫົວເສືອ (Tigerhead)",
+            "nameTh": "น้ำดื่มตราหัวเสือ",
+            "priceLAK": 5000,
+            "icon": "droplet"
+          },
+          {
+            "id": "s1",
+            "nameLo": "ໂຄ້ກ / ແປັບຊີ (Coke/Pepsi)",
+            "nameTh": "โค้ก / แป๊ปซี่",
+            "priceLAK": 10000,
+            "icon": "soda"
+          },
+          {
+            "id": "s2",
+            "nameLo": "ນ້ຳສົ້ມ ມິຣິນດ້າ (Mirinda)",
+            "nameTh": "น้ำส้ม มิรินด้า",
+            "priceLAK": 10000,
+            "icon": "soda"
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "nameLo": "ເຄື່ອງຄຽງ & ບໍລິການ",
+        "nameTh": "เครื่องเคียง & บริการ",
+        "items": [
+          {
+            "id": "i1",
+            "nameLo": "ນ້ຳກ້ອນ ຖັງໃຫຍ່",
+            "nameTh": "น้ำแข็ง ถังใหญ่",
+            "priceLAK": 10000,
+            "icon": "cube"
+          },
+          {
+            "id": "c1",
+            "nameLo": "ຖ່ານເຕົາ ຄຸນນະພາບສູງ",
+            "nameTh": "ถ่านเตา ไร้ควันเกรด A",
+            "priceLAK": 10000,
+            "icon": "flame"
+          },
+          {
+            "id": "s3",
+            "nameLo": "ນ້ຳແຈ່ວຂວດ ສູດຄຳທອງ (ກັບບ້ານ)",
+            "nameTh": "น้ำจิ้มขวด สูตรคำทอง",
+            "priceLAK": 20000,
+            "icon": "flame"
+          },
+          {
+            "id": "v1",
+            "nameLo": "ຊຸດຜັກລວມ & ວຸ້ນເສັ້ນ",
+            "nameTh": "ชุดผักรวม & วุ้นเส้น",
+            "priceLAK": 15000,
+            "icon": "leaf"
+          },
+          {
+            "id": "t1",
+            "nameLo": "ເຕົ້າຮູ້ຊີດ / ປູອັດ",
+            "nameTh": "เต้าหู้ชีส / ปูอัด",
+            "priceLAK": 15000,
+            "icon": "gem"
+          },
+          {
+            "id": "m1",
+            "nameLo": "ໝີ່ຫຍົກ 2 ກ້ອນ",
+            "nameTh": "บะหมี่หยก 2 ก้อน",
+            "priceLAK": 10000,
+            "icon": "bowl"
+          },
+          {
+            "id": "p1",
+            "nameLo": "ຄ່າເປີດເຕົາ/ໝໍ້ເພີ່ມ",
+            "nameTh": "ค่าเปิดเตา/กระทะเพิ่ม",
+            "priceLAK": 20000,
+            "icon": "pot"
+          }
+        ]
+      },
+      {
+        "id": "freebies",
+        "nameLo": "ຂອງແຖມ",
+        "nameTh": "ของแถม",
+        "items": [
+          {
+            "id": "f1",
+            "nameLo": "ຊຸດຜັກສົດ & ວຸ້ນເສັ້ນ (ຟຣີ)",
+            "nameTh": "ชุดผักสด & วุ้นเส้น (ฟรี)",
+            "priceLAK": 0,
+            "isFreebie": true,
+            "icon": "leaf"
+          },
+          {
+            "id": "f2",
+            "nameLo": "ນ້ຳຊຸບກະດູກໝູເຕີມ (ຟຣີ)",
+            "nameTh": "น้ำซุปกระดูกหมูเติม (ฟรี)",
+            "priceLAK": 0,
+            "isFreebie": true,
+            "icon": "pot"
+          },
+          {
+            "id": "f3",
+            "nameLo": "ນ້ຳແຈ່ວສູດເດັດເຕີມ (ຟຣີ)",
+            "nameTh": "น้ำจิ้มสูตรเด็ดเติม (ฟรี)",
+            "priceLAK": 0,
+            "isFreebie": true,
+            "icon": "flame"
+          },
+          {
+            "id": "f4",
+            "nameLo": "ມັນໝູທາກະທະ (ຟຣີ)",
+            "nameTh": "มันหมูทากระทะ (ฟรี)",
+            "priceLAK": 0,
+            "isFreebie": true,
+            "icon": "drumstick"
+          }
+        ]
+      }
+    ]
+  },
+  "tables": [
+    {
+      "id": 1,
+      "nameLo": "ໂຕະ 1",
+      "nameTh": "โต๊ะ 1",
+      "status": "occupied",
+      "seatedAt": 1792217086822,
+      "items": [
+        {
+          "id": "meat_101",
+          "name": "ສາມຊັ້ນໝັກງາພິເສດ",
+          "nameLo": "ສາມຊັ້ນໝັກງາພິເສດ",
+          "nameTh": "สามชั้นสไลซ์หมักงาเกาหลี",
+          "weight": 1.2,
+          "unitPrice": 115000,
+          "total": 138000,
+          "time": "18:30",
+          "status": "ready",
+          "station": "grill",
+          "note": "🔥 ເຜັດແຊ່ບ"
+        },
+        {
+          "id": "b1_102",
+          "name": "ເບຍລາວ ໃຫຍ່ (Beerlao 640ml)",
+          "nameLo": "ເບຍລາວ ໃຫຍ່ (Beerlao 640ml)",
+          "nameTh": "เบียร์ลาว ขวดใหญ่",
+          "qty": 3,
+          "unitPrice": 18000,
+          "total": 54000,
+          "time": "18:31",
+          "status": "ready",
+          "station": "bar"
+        },
+        {
+          "id": "i1_103",
+          "name": "ນ້ຳກ້ອນ ຖັງໃຫຍ່",
+          "nameLo": "ນ້ຳກ້ອນ ຖັງໃຫຍ່",
+          "nameTh": "น้ำแข็ง ถังใหญ่",
+          "qty": 1,
+          "unitPrice": 10000,
+          "total": 10000,
+          "time": "18:31",
+          "status": "ready",
+          "station": "bar"
+        }
+      ],
+      "subtotalLAK": 202000
+    },
+    {
+      "id": 2,
+      "nameLo": "ໂຕະ 2",
+      "nameTh": "โต๊ะ 2",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 3,
+      "nameLo": "ໂຕະ 3",
+      "nameTh": "โต๊ะ 3",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 4,
+      "nameLo": "ໂຕະ 4",
+      "nameTh": "โต๊ะ 4",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 5,
+      "nameLo": "ໂຕະ 5",
+      "nameTh": "โต๊ะ 5",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 6,
+      "nameLo": "ໂຕະ 6",
+      "nameTh": "โต๊ะ 6",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 7,
+      "nameLo": "ໂຕະ 7",
+      "nameTh": "โต๊ะ 7",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 8,
+      "nameLo": "ໂຕະ 8",
+      "nameTh": "โต๊ะ 8",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 9,
+      "nameLo": "ໂຕະ 9",
+      "nameTh": "โต๊ะ 9",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 10,
+      "nameLo": "ໂຕະ 10",
+      "nameTh": "โต๊ะ 10",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 11,
+      "nameLo": "ໂຕະ 11",
+      "nameTh": "โต๊ะ 11",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 12,
+      "nameLo": "ໂຕະ 12",
+      "nameTh": "โต๊ะ 12",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 13,
+      "nameLo": "ໂຕະ 13",
+      "nameTh": "โต๊ะ 13",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 14,
+      "nameLo": "ໂຕະ 14",
+      "nameTh": "โต๊ะ 14",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 15,
+      "nameLo": "ໂຕະ 15",
+      "nameTh": "โต๊ะ 15",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    },
+    {
+      "id": 16,
+      "nameLo": "ໂຕະ 16",
+      "nameTh": "โต๊ะ 16",
+      "status": "empty",
+      "seatedAt": null,
+      "items": [],
+      "subtotalLAK": 0
+    }
+  ],
+  "ordersHistory": [
+    {
+      "id": "TB2-0456",
+      "type": "dinein",
+      "tableId": 2,
+      "tableName": "ໂຕະ 2",
+      "time": 1792127050456,
+      "seatedDurationMins": 109,
+      "items": [
+        {
+          "id": "meat_201",
+          "name": "ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ",
+          "nameLo": "ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ",
+          "nameTh": "เนื้อวัวพรีเมียม & ซีฟู้ดกุ้งหมึก",
+          "weight": 1.5,
+          "unitPrice": 145000,
+          "total": 217500,
+          "time": "18:05",
+          "status": "ready",
+          "station": "grill",
+          "note": "🧊 ແຍກນ້ຳ"
+        },
+        {
+          "id": "v1_202",
+          "name": "ຊຸດຜັກລວມ & ວຸ້ນເສັ້ນ",
+          "nameLo": "ຊຸດຜັກລວມ & ວຸ້ນເສັ້ນ",
+          "nameTh": "ชุดผักรวม & วุ้นเส้น",
+          "qty": 2,
+          "unitPrice": 15000,
+          "total": 30000,
+          "time": "18:06",
+          "status": "ready",
+          "station": "kitchen"
+        },
+        {
+          "id": "b2_203",
+          "name": "ເບຍລາວ Gold (ຂວດ)",
+          "nameLo": "ເບຍລາວ Gold (ຂວດ)",
+          "nameTh": "เบียร์ลาว โกลด์",
+          "qty": 4,
+          "unitPrice": 22000,
+          "total": 88000,
+          "time": "18:10",
+          "status": "ready",
+          "station": "bar"
+        }
+      ],
+      "totalLAK": 335500,
+      "paymentMethod": "BCEL One",
+      "cashReceivedLAK": 335500,
+      "changeLAK": 0
+    },
+    {
+      "id": "TB3-2274",
+      "type": "dinein",
+      "tableId": 3,
+      "tableName": "ໂຕະ 3",
+      "time": 1792127042286,
+      "seatedDurationMins": 96,
+      "items": [
+        {
+          "id": "meat_301",
+          "name": "ຊີ້ນລວມ (ໝູ/ໄກ່/ລູກຊີ້ນ)",
+          "nameLo": "ຊີ້ນລວມ (ໝູ/ໄກ່/ລູກຊີ້ນ)",
+          "nameTh": "หมูหมักรวม (หมู/ไก่/ตับ/ลูกชิ้น)",
+          "weight": 2,
+          "unitPrice": 95000,
+          "total": 190000,
+          "time": "17:20",
+          "status": "ready",
+          "station": "grill"
+        },
+        {
+          "id": "t1_302",
+          "name": "ເຕົ້າຮູ້ຊີດ / ປູອັດ",
+          "nameLo": "ເຕົ້າຮູ້ຊີດ / ປູອັດ",
+          "nameTh": "เต้าหู้ชีส / ปูอัด",
+          "qty": 2,
+          "unitPrice": 15000,
+          "total": 30000,
+          "time": "17:45",
+          "status": "ready",
+          "station": "kitchen",
+          "note": "⚡ ດ່ວນ!"
+        },
+        {
+          "id": "b1_303",
+          "name": "ເບຍລາວ ໃຫຍ່ (Beerlao 640ml)",
+          "nameLo": "ເບຍລາວ ໃຫຍ່ (Beerlao 640ml)",
+          "nameTh": "เบียร์ลาว ขวดใหญ่",
+          "qty": 5,
+          "unitPrice": 18000,
+          "total": 90000,
+          "time": "17:50",
+          "status": "ready",
+          "station": "bar"
+        }
+      ],
+      "totalLAK": 310000,
+      "paymentMethod": "BCEL One",
+      "cashReceivedLAK": 310000,
+      "changeLAK": 0
+    },
+    {
+      "id": "TB5-4241",
+      "type": "dinein",
+      "tableId": 5,
+      "tableName": "ໂຕະ 5",
+      "time": 1792005364241,
+      "seatedDurationMins": 68,
+      "items": [
+        {
+          "id": "m2",
+          "name": "ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ",
+          "weight": 1.45,
+          "unitPrice": 145000,
+          "total": 210250,
+          "time": "18:35"
+        },
+        {
+          "id": "b2",
+          "name": "ເບຍລາວ Gold",
+          "qty": 2,
+          "unitPrice": 22000,
+          "total": 44000,
+          "time": "18:36"
+        }
+      ],
+      "totalLAK": 254250,
+      "paymentMethod": "BCEL One",
+      "cashReceivedLAK": 254250,
+      "changeLAK": 0
+    },
+    {
+      "id": "TB8-1385",
+      "type": "dinein",
+      "tableId": 8,
+      "tableName": "ໂຕະ 8",
+      "time": 1792005351386,
+      "seatedDurationMins": 52,
+      "items": [
+        {
+          "id": "meat_801",
+          "name": "ຊີ້ນລວມ (ໝູ/ໄກ່/ລູກຊີ້ນ)",
+          "weight": 1.5,
+          "unitPrice": 95000,
+          "total": 142500,
+          "time": "19:10"
+        },
+        {
+          "id": "b1_802",
+          "name": "ເບຍລາວ ໃຫຍ່ (Beerlao)",
+          "qty": 3,
+          "unitPrice": 18000,
+          "total": 54000,
+          "time": "19:12"
+        }
+      ],
+      "totalLAK": 196500,
+      "paymentMethod": "BCEL One",
+      "cashReceivedLAK": 196500,
+      "changeLAK": 0
+    }
+  ],
+  "dailyStats": {
+    "date": "2026-10-16",
+    "totalRevenueLAK": 1488000,
+    "totalMeatKg": 6.45,
+    "ordersCount": 6,
+    "dineInCount": 5,
+    "takeawayCount": 1,
+    "paymentBreakdown": {
+      "bcelOneLAK": 1233750,
+      "cashLAK": 254250
+    }
+  },
+  "recentActivities": [
+    {
+      "id": 1792127050456,
+      "time": "12:04:10",
+      "textLo": "ໂຕະ 2: ເຊັກບິນສຳເລັດ 335,500 ₭ (BCEL One)",
+      "textTh": "โต๊ะ 2: เช็กบิลเรียบร้อย 335,500 ₭ (BCEL One)"
+    },
+    {
+      "id": 1792127042344,
+      "time": "12:04:02",
+      "textLo": "ໂຕະ 3: ເຊັກບິນສຳເລັດ 310,000 ₭ (BCEL One)",
+      "textTh": "โต๊ะ 3: เช็กบิลเรียบร้อย 310,000 ₭ (BCEL One)"
+    },
+    {
+      "id": 1792127038362,
+      "time": "12:03:58",
+      "textLo": "🔔 ໂຕະ 2: ທຸກລາຍການອາຫານພ້ອມເສີບແລ້ວ!",
+      "textTh": "🔔 โต๊ะ 2: อาหารทุกรายการพร้อมเสิร์ฟแล้ว!"
+    },
+    {
+      "id": 1792127035872,
+      "time": "12:03:55",
+      "textLo": "🔔 ໂຕະ 2: \"ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ\" ພ້ອມເສີບແລ້ວ",
+      "textTh": "🔔 โต๊ะ 2: \"ຊີ້ນງົວພຣີມ່ຽມ & ຊີຟູດ\" พร้อมเสิร์ฟแล้ว"
+    },
+    {
+      "id": 1792127034970,
+      "time": "12:03:54",
+      "textLo": "🔔 ໂຕະ 2: \"ຊຸດຜັກລວມ & ວຸ້ນເສັ້ນ\" ພ້ອມເສີບແລ້ວ",
+      "textTh": "🔔 โต๊ะ 2: \"ຊຸດຜັກລວມ & ວຸ້ນເສັ້ນ\" พร้อมเสิร์ฟแล้ว"
+    },
+    {
+      "id": 1792127032521,
+      "time": "12:03:52",
+      "textLo": "🔔 ໂຕະ 3: ທຸກລາຍການອາຫານພ້ອມເສີບແລ້ວ!",
+      "textTh": "🔔 โต๊ะ 3: อาหารทุกรายการพร้อมเสิร์ฟแล้ว!"
+    },
+    {
+      "id": 1792127029947,
+      "time": "12:03:49",
+      "textLo": "🔔 ໂຕະ 1: ທຸກລາຍການອາຫານພ້ອມເສີບແລ້ວ!",
+      "textTh": "🔔 โต๊ะ 1: อาหารทุกรายการพร้อมเสิร์ฟแล้ว!"
+    },
+    {
+      "id": 1792124121540,
+      "time": "11:15:21",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ชี้นดาด & ปิ้งย่าง"
+    },
+    {
+      "id": 1792124119867,
+      "time": "11:15:19",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ອາຫານ & ຕາມສັ່ງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ครัวไทย-ลาว & อาหารตามสั่ง"
+    },
+    {
+      "id": 1792124048488,
+      "time": "11:14:08",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ชี้นดาด & ปิ้งย่าง"
+    },
+    {
+      "id": 1792124046800,
+      "time": "11:14:06",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ອາຫານ & ຕາມສັ່ງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ครัวไทย-ลาว & อาหารตามสั่ง"
+    },
+    {
+      "id": 1792123979394,
+      "time": "11:12:59",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ชี้นดาด & ปิ้งย่าง"
+    },
+    {
+      "id": 1792123977791,
+      "time": "11:12:57",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ອາຫານ & ຕາມສັ່ງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ครัวไทย-ลาว & อาหารตามสั่ง"
+    },
+    {
+      "id": 1792123946637,
+      "time": "11:12:26",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ຊິ້ນດາດ & ປິ້ງຍ່າງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ชี้นดาด & ปิ้งย่าง"
+    },
+    {
+      "id": 1792123944936,
+      "time": "11:12:24",
+      "textLo": "ປ່ຽນຮູບແບບຮ້ານເປັນ: ຄຳທອງ ອາຫານ & ຕາມສັ່ງ",
+      "textTh": "เปลี่ยนรูปแบบร้านเป็น: คำทอง ครัวไทย-ลาว & อาหารตามสั่ง"
+    },
+    {
+      "id": 1792095003,
+      "time": "18:31:10",
+      "textLo": "ໂຕະ 1: ເພີ່ມ 3 ລາຍການ (202,000 ₭) [ສົ່ງເຂົ້າຄົວ KDS]",
+      "textTh": "โต๊ะ 1: เพิ่ม 3 รายการ (202,000 ₭) [ส่งเข้าครัว KDS]"
+    },
+    {
+      "id": 1792095002,
+      "time": "18:10:05",
+      "textLo": "ໂຕະ 2: ເພີ່ມ 3 ລາຍການ (335,500 ₭) [ສົ່ງເຂົ້າຄົວ KDS]",
+      "textTh": "โต๊ะ 2: เพิ่ม 3 รายการ (335,500 ₭) [ส่งเข้าครัว KDS]"
+    },
+    {
+      "id": 1792095001,
+      "time": "17:50:22",
+      "textLo": "ໂຕະ 5: ເຊັກບິນສຳເລັດ 254,250 ₭ (BCEL One)",
+      "textTh": "โต๊ะ 5: เช็กบิลเรียบร้อย 254,250 ₭ (BCEL One)"
+    }
+  ]
+}
